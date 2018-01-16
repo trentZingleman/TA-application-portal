@@ -1,0 +1,193 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>TA Portal Welcome</title>
+    <style type="text/css">
+            body {
+                margin: 0;
+                padding: 0;
+                min-width: 100% !important;
+            }
+
+            table {
+                width: 100%;
+                max-width: 475px;
+                margin: 0 auto;
+                border: 0;
+                padding: 0;
+                border-spacing: 0; 
+            }
+
+        .content {
+            width: 100%;
+            max-width: 600px;
+            background-color: #ffffff;
+        }
+
+        .header {
+            padding: 40px 30px 20px 30px;
+            text-align: left;
+            background-color: #222;
+            height: 70px;
+        }
+
+
+        .registration-message {
+            border-bottom: 1px solid #f2eeed;
+            background-color: #E9F2F3;
+            padding: 30px 30px 30px 30px;
+        }
+
+        .subhead {
+            font-size: 15px;
+            color: #ffffff;
+            font-family: sans-serif;
+            letter-spacing: 4px;
+            padding: 0 0 0 3px;
+        }
+
+            .h1, .h2, .bodycopy {
+                color: #153643;
+                font-family: sans-serif;
+            }
+
+        .h1 {
+            font-size: 33px;
+            color: #ffffff !important;
+            line-height: 38px;
+            font-weight: bold;
+            padding: 5px 0 0 0;
+        }
+
+            .h2 {
+                padding: 0 0 15px 0;
+                font-size: 24px;
+                line-height: 28px;
+                font-weight: bold;
+            }
+
+            .bodycopy {
+                font-size: 16px;
+                line-height: 22px;
+            }
+
+            .button {
+                text-align: center;
+                font-size: 18px;
+                font-family: sans-serif;
+                font-weight: bold;
+                padding: 0 30px 0 30px;
+            }
+
+                .button a {
+                    color: #ffffff;
+                    text-decoration: none;
+                }
+
+
+            .linked {
+                text-decoration: none;
+                color: rgb(224, 84, 67);
+            }
+
+            .red-button {
+                background-color: #ec2125 !important;
+                color: #FFF;
+                line-height: 11px;
+                font-size: 11px;
+                background-size: 12px;
+                display: inline;
+                height: 45px;
+                text-transform: uppercase;
+                -webkit-font-smoothing: antialiased;
+                font-family: lato;
+                color: #ffffff !important;
+                -webkit-border-radius: 3px;
+                -moz-border-radius: 3px;
+                -ms-border-radius: 3px;
+                -o-border-radius: 3px;
+                border-radius: 3px;
+                border: transparent;
+                margin: 0 5px 0 0;
+                padding: 9px 23px 11px 11px;
+                background-repeat: no-repeat;
+                background-position: center right;
+            }
+
+                .red-button > a {
+                    color: white;
+                    text-decoration: none;
+                }
+
+        .button-section{
+            padding: 15px 0 0 0;
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <table>
+        <tr>
+            <td>
+
+                <table class="content">
+                    <tr>
+                        <td class="header">
+
+                            <table>
+                                <tr>
+                                    <td>
+                                        <table>
+                                            <tr>
+                                                <td class="subhead">
+                                                    {{ subhead }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="h1">
+                                                    {{ h1 }}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="registration-message">
+                            <table>
+                                <tr>
+                                    <td class="h2">
+                                        {{ greeting }},
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="bodycopy">
+                                        {{ bodycopy }} 
+                                <tr>
+                                    <td class="button-section">
+                                        <table class="buttonwrapper">
+                                            <tr>
+                                                <td class="red-button">
+                                                    <a href="{{ url }}">{{ bttnTxt }}</a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

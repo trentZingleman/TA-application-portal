@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>WSU TA Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/wsuicon.png') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/main.css') }}">
+
+    <script src="{{ url_for('static', filename='scripts/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='scripts/portalApp.js') }}"></script>
+    <script type="text/javascript">
+        $(function () {
+            portalAppr.start({{ current_user|tojson }} );
+        });
+    </script>
+</head>
+
+</html>
+
+<body>
+
+
+
+    <header>
+        <div class="header-container">
+            <div class="header-wsu-logo"></div>
+
+            <div class="user-welcome"> Welcome back, {{ current_user.name }} </div>
+
+
+            <div class="header-options-list">
+                <ul class="list-options">
+
+                    {% if current_user.type == 'student' %}
+                        <li class="h-list-option"><a class="h-option page-header-search-button" href="">Search</a><a class="h-option page-header-home-button" href="">Home</a></li>
+                    {% else %}
+                        <li class="h-list-option"><a class="h-option create-lecture-button" href="">Create</a></li>
+                    {% endif %}
+
+                    <li class="h-list-option"><a class="h-option profile-button" href="">Profile</a></li>
+                    <li class="h-list-option"><a class="h-option" href="{{ url_for('logout') }}">Logout</a></li>
+                </ul>
+            </div>
+            
+        </div>
+
+    </header>
+
+    <!-- mini profile popup window vvvvvvvvvvv -->
+
+
+
+    <div class="mini-profile-container">
+        <img src="{{ url_for('static', filename='images/closeButton.png') }}" class="mini-profile-close-button">
+
+        <div class="mini-profile-header">
+            <p class="mini-profile-persons-name">John Doe</p>
+            <p class="mini-profile-persons-occupation">Teacher</p>
+            <img src="" class="mini-profile-picture">
+
+        </div>
+
+        <div class="mini-profile-content">
+
+            <div class="mini-profile-bio-container">
+                <p class="mini-profile-content-header">About me</p>
+                <p class="mini-profile-bio">What up boys I love working very hard on things I'm just a great guy I know</p>
+            </div>
+
+            <hr class="mini-profile-horizontal-line" />
+
+            {% if current_user.type == 'teacher' %}
+                <div class="mini-profile-classes-taken-container">
+                    <p class="mini-profile-content-header">Classes I have taken</p>
+                    <ul class="mini-profile-class-info-list">
+                        <li class="mini-profile-class-info-list-entry">
+                            <span class="mini-profile-class-info-label">Name: <span class="mini-profile-class-name">CPTS360</span><span class="mini-profile-class-info-label"> Grade: <span class="mini-profile-class-grade">A-</span></span></span>
+                        </li>
+
+                    </ul>
+                </div>
+            {% endif %}
+
+            <div class="mini-profile-class-info-container">
+                <p class="mini-profile-content-header">Position info</p>
+                <ul class="mini-profile-class-info-list">
+                    <li class="mini-profile-class-info-list-entry">
+                        <span class="mini-profile-class-info-label">Name: <span class="mini-profile-class-name">CPTS360</span></span>
+                    </li>
+
+                    <li class="mini-profile-class-info-list-entry">
+                        <span class="mini-profile-class-info-label">Days: <span class="mini-profile-class-days">MWF</span></span>
+                    </li>
+
+                    <li class="mini-profile-class-info-list-entry">
+                        <span class="mini-profile-class-info-label">Time: <span class="mini-profile-class-time">1:00pm - 2:10pm</span></span>
+                    </li>
+
+                    {% if current_user.type == 'teacher' %}
+                        <li class="mini-profile-class-info-list-entry">
+                            <span class="mini-profile-class-info-label">TAs wanted: <span class="mini-profile-tas-wanted">1</span></span>
+                        </li>
+
+                        <li class="mini-profile-class-info-list-entry">
+                            <span class="mini-profile-class-info-label">TAs accepted: <span class="mini-profile-tas-accepted">0</span></span>
+                        </li>
+                    {% endif %}
+
+                </ul>
+            </div>
+
+
+            <br class="button-break" />
+
+            <button class="mini-profile-button"></button>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+    <!-- mini profile popup window ^^^^^^^^^^ -->
+
+
+    <section class="mainbody">
+        
+        {% if current_user.type == 'teacher' %}
+            <section class="table-seperator">
+                <div class="my-table-identifier">Current TA Applications</div>
+                <table class="my-table applied-applications-table">
+                    <!-- The headers of the table -->
+                    <tr class="my-table-header-row applied-applications-hdr">
+                        <!-- They all have 'curApp' class because each header will be a pressable button which will sort the list accordingly when pressed -->
+                        <th class="my-table-headers curApp-userName-hdr">Student Name</th>
+                        <th class="my-table-headers curApp-className-hdr">Class Name</th>
+                        <th class="my-table-headers curApp-classTime-hdr">Class Time</th>
+                        <th class="my-table-headers curApp-classDays-hdr">Class Days</th>
+                        <th class="my-table-headers curApp-appTime-hdr">Application Time</th>
+                    </tr>
+                    <!-- Data entires of the table -->
+                    <tr class="my-table-entry-rows applied-applications-data">
+                        <!-- They all have 'curApp' class because each entry will have to be identifiable when getting information form the server -->
+                        <td class="my-table-entries curApp-userName"><a href="profilePage.html">Frank Smith</a></td>
+                        <td class="my-table-entries curApp-className">CPTS 322</td>
+                        <td class="my-table-entries curApp-classTime">12:10pm - 1:00pm</td>
+                        <td class="my-table-entries curApp-classDays">MWF</td>
+                        <td class="my-table-entries curApp-appTime">8:16pm</td>
+                    </tr>
+                </table>
+            </section>
+
+            <section class="table-seperator">
+                <div class="my-table-identifier">Accepted TA Positions</div>
+                <table class="my-table accepted-applications-table">
+                    <!-- The headers of the table -->
+                    <tr class="my-table-header-row accepted-applications-hdr">
+                        <!-- They all have 'curApp' class because each header will be a pressable button which will sort the list accordingly when pressed -->
+                        <th class="my-table-headers accApp-userName-hdr">Student Name</th>
+                        <th class="my-table-headers accApp-className-hdr">Class Name</th>
+                        <th class="my-table-headers accApp-classTime-hdr">Class Time</th>
+                        <th class="my-table-headers accApp-classDays-hdr">Class Days</th>
+                    </tr>
+                    <!-- Data entires of the table -->
+                    <tr class="my-table-entry-rows accepted-applications-data">
+                        <!-- They all have 'curApp' class because each entry will have to be identifiable when getting information form the server -->
+                        <td class="my-table-entries accApp-userName"><a href="profilePage.html">Frank Smith</a></td>
+                        <td class="my-table-entries accApp-className">CPTS 317</td>
+                        <td class="my-table-entries accApp-classTime">12:10pm - 1:00pm</td>
+                        <td class="my-table-entries accApp-classDays">MWF</td>
+                    </tr>
+                </table>
+            </section>
+
+            <section class="table-seperator">
+                <div class="my-table-identifier">Your Class Listings</div>
+                <table class="my-table my-lectures-table">
+                    <!-- The headers of the table -->
+                    <tr class="my-table-header-row my-lectures-hdr">
+                        <!-- They all have 'curApp' class because each header will be a pressable button which will sort the list accordingly when pressed -->
+                        <th class="my-table-headers opnApp-className-hdr">Class Name</th>
+                        <th class="my-table-headers opnApp-classTime-hdr">Class Time</th>
+                        <th class="my-table-headers opnApp-classDays-hdr">Class Days</th>
+                    </tr>
+                    <!-- Data entires of the table -->
+                    <tr class="my-table-entry-rows my-lectures-data">
+                        <!-- They all have 'curApp' class because each entry will have to be identifiable when getting information form the server -->
+                        <td class="my-table-entries opnApp-className">CPTS 317</td>
+                        <td class="my-table-entries opnApp-classTime">12:10pm - 1:00pm</td>
+                        <td class="my-table-entries opnApp-classDays">MWF</td>
+                    </tr>
+                </table>
+            </section>
+
+        {% else %}
+            <section class="table-seperator accepted-applications">
+                <div class="my-table-identifier">Accepted TA Positions</div>
+                <table class="my-table accepted-applications-table">
+                    <!-- headers of he table-->
+                    <tr class="my-table-header-row accepted-applications-hdr">
+                        <th class="my-table-headers accApp-userName-hdr">Professor Name</th>
+                        <th class="my-table-headers accApp-className-hdr">Class Name</th>
+                        <th class="my-table-headers accApp-classTime-hdr">Class Time</th>
+                        <th class="my-table-headers accApp-classDays-hdr">Class Days</th>
+                    </tr>
+                    <!--data entries of the table-->
+                    <tr class="my-table-entry-rows accepted-applications-data">
+                        <!-- They all have 'curApp' class because each entry will have to be identifiable when getting information form the server -->
+                        <td class="my-table-entries accApp-userName">Sakire, Arslan Ay</td>
+                        <td class="my-table-entries accApp-className">CPTS 322</td>
+                        <td class="my-table-entries accApp-classTime">12:10pm - 1:00pm</td>
+                        <td class="my-table-entries accApp-classDays">MWF</td>
+                    </tr>
+                </table>
+            </section>
+
+            <section class="table-seperator applied-applications">
+                <div class="my-table-identifier">Applied TA Applications</div>
+                <table class="my-table applied-applications-table">
+                    <!-- The headers of the table -->
+                    <tr class="my-table-header-row applied-applications-hdr">
+                        <!-- They all have 'curApp' class because each header will be a pressable button which will sort the list accordingly when pressed -->
+                        <th class="my-table-headers curApp-userName-hdr">Professor Name</th>
+                        <th class="my-table-headers curApp-className-hdr">Class Name</th>
+                        <th class="my-table-headers curApp-classTime-hdr">Class Time</th>
+                        <th class="my-table-headers curApp-classDays-hdr">Class Days</th>
+                        <th class="my-table-headers curApp-isClosed-hdr">Is Closed?</th>
+                    </tr>
+                    <!-- Data entires of the table -->
+                    <tr class="my-table-entry-rows applied-applications-data">
+                        <!-- They all have 'curApp' class because each entry will have to be identifiable when getting information form the server -->
+                        <td class="my-table-entries curApp-userName">Dang, Zhe</td>
+                        <td class="my-table-entries curApp-className">CPTS 317</td>
+                        <td class="my-table-entries curApp-classTime">3:00pm - 4:00pm</td>
+                        <td class="my-table-entries curApp-classDays">MWF</td>
+                        <td class="my-table-entries curApp-isClosed">false</td>
+                    </tr>
+                </table>
+            </section>
+
+            <section class="table-seperator search-form">
+                <div class="search-from-inputs">
+                    <span class="lecture-search-criteria lecture-search-class-names">
+                        Class Name:
+
+                        <select class="search-form-dropdown-class-names" size="1">
+                            <option value="0">All</option>
+                            <option value="1">CPTS360</option>
+                            <option value="2">CPTS322</option>
+                            <option value="3">CPTS302</option>
+                        </select>
+                    </span>
+
+                    <span class="lecture-search-criteria lecture-search-teacher-name">
+                        Teacher Name:
+
+                        <input type="text" placeholder="All" class="search-form-teacher-name-textbox" name="search-form-teacher-name-textbox" />
+                    </span>
+                </div>
+                
+                
+            </section>
+            
+            <section class="table-seperator searched-lectures">
+                <div class="my-table-identifier">Search Results</div>
+                <table class="my-table my-lectures-table">
+                    <!-- The headers of the table -->
+                    <tr class="my-table-header-row my-lectures-hdr">
+                        <!-- They all have 'curApp' class because each header will be a pressable button which will sort the list accordingly when pressed -->
+                        <th class="my-table-headers opnApp-userName-hdr">Professor Name</th>
+                        <th class="my-table-headers opnApp-className-hdr">Class Name</th>
+                        <th class="my-table-headers opnApp-classTime-hdr">Class Time</th>
+                        <th class="my-table-headers opnApp-classDays-hdr">Class Days</th>
+                    </tr>
+                    <!-- Data entires of the table -->
+                    <tr class="my-table-entry-rows my-lectures-data">
+                        <!-- They all have 'curApp' class because each entry will have to be identifiable when getting information form the server -->
+                        <td class="my-table-entries opnApp-userName">Dang, Zhe</td>
+                        <td class="my-table-entries opnApp-className">CPTS 317</td>
+                        <td class="my-table-entries opnApp-classTime">12:10pm - 1:00pm</td>
+                        <td class="my-table-entries opnApp-classDays">MWF</td>
+                    </tr>
+                </table>
+            </section>
+
+            {% endif %}
+
+        </section>
+
+
+
+
+
+
+
+
+
+
+    <div class="profile-section"></div>
+
+
+    <div class="edit-profile-page-wrapper">
+
+        <div class="profile-picture-section">
+        </div>
+
+        <div class="change-profile-picture-section section-header">
+            <div class="section-text">
+                Change Profile Picture
+            </div>
+
+            <button class="my-button save-picture-button">Save</button>
+            <input class="my-button add-picture-button" type="file" id="file_input" value="Add" />
+        </div>
+
+        <div class="edit-bio-section">
+            <div class="edit-bio-section-header section-header">
+                <div class="section-text">
+                    Edit Bio
+                </div>
+
+                <button class="my-button save-bio-button">Save</button>
+            </div>
+
+            <textarea class="edit-bio-textbox section-entry">Describe who you are</textarea>
+        </div>
+
+        {% if current_user.type == 'student' %}
+            <div class="edit-courses-taken-section">
+                <div class="edit-courses-taken-section-header section-header">
+                    <div class="section-text">
+                        Edit Courses Taken
+                    </div>
+
+                    <button class="my-button save-classes-button">Save</button>
+                    <button class="my-button add-class-button">Add</button>
+                </div>
+
+                <div class="add-class-entry section-entry">
+                    <div class="section-text">
+                        Class:
+                    </div>
+
+                    <select class="dropdown-class-names" size="1">
+                        <option value="1">CPTS360</option>
+                        <option value="2">CPTS322</option>
+                        <option value="3">CPTS302</option>
+                    </select>
+
+                    <div class="section-text">
+                        Grade:
+                    </div>
+
+                    <select class="dropdown-grades" size="1">
+                        <option value="1">A</option>
+                        <option value="2">A-</option>
+                        <option value="3">B+</option>
+                        <option value="4">B</option>
+                        <option value="5">B-</option>
+                        <option value="6">C+</option>
+                        <option value="7">C</option>
+                        <option value="8">C-</option>
+                        <option value="9">D</option>
+                    </select>
+
+                    <button class="my-button delete-class-button">Delete</button>
+                </div>
+
+                <div class="saved-class-entry section-entry">
+                    <div class="section-text">
+                        Class:
+                    </div>
+
+                    <div class="section-text underlined-text class-name">
+                        CPTS360
+                    </div>
+
+                    <div class="section-text">
+                        Grade:
+                    </div>
+
+                    <div class="section-text underlined-text class-grade">
+                        B+
+                    </div>
+
+                    <button class="my-button delete-saved-class-button">Delete</button>
+                </div>
+            </div>
+
+            <div class="edit-watch-for-courses-section">
+                <div class="edit-watch-for-courses-section-header section-header">
+                    <div class="section-text">
+                        Edit Watch List
+                    </div>
+
+                    <button class="my-button save-watching-button">Save</button>
+                    <button class="my-button add-watching-button">Add</button>
+                </div>
+
+                <div class="add-watch-class-entry section-entry">
+                    <div class="section-text">
+                        Class:
+                    </div>
+
+                    <select class="dropdown-class-names" size="1">
+                        <option value="1">CPTS360</option>
+                        <option value="2">CPTS322</option>
+                        <option value="3">CPTS302</option>
+                    </select>
+
+                    <button class="my-button delete-watch-class-button">Delete</button>
+                </div>
+
+                <div class="saved-watch-class-entry section-entry">
+                    <div class="section-text">
+                        Class:
+                    </div>
+
+                    <div class="section-text underlined-text class-name">
+                        CPTS360
+                    </div>
+
+                    <button class="my-button delete-saved-watch-class-button">Delete</button>
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="notification-settings-section">
+            <div class="notification-settings-section-header section-header">
+                <div class="section-text">
+                    Notification Settings
+                </div>
+
+                <button class="my-button save-notifications-button">Save</button>
+            </div>
+
+            <div class="notification-settings-entry section-entry">
+                <div class="section-text">
+                    Receive Email Notifications?
+                </div>
+
+                <input id="Notification-checker" class="my-button notification-checkbox" type="checkbox">
+            </div>
+        </div>
+
+        <div class="account-settings-section">
+
+        </div>
+
+
+    </div>
+
+
+
+
+    <!--vvvvvvvvv Create Lecture Section vvvvvvvvvv-->
+    {% if current_user.type == 'teacher' %}
+    <section class="create-lecture-wrapper">
+        <p class="form-title">Create Lecture</p>
+
+        <section class="create-lecture-window">
+            <form class="create-lecture-form" action="" method="post">
+                <div class="class-options">
+                    <select class="dropdown-class-names" name="class-dropown" size="1">
+                        <!--<option>Class Name</option>-->
+                        <option value="1">CPTS360</option>
+                        <option value="2">CPTS322</option>
+                        <option value="3">CPTS302</option>
+                    </select>
+                    <label class="lab-check-container">
+                        <input id="lab-check" type="checkbox" class="lab-checkbox">
+                        <label for="lab-check" class="lab-checkbox-label"><span class="icon"></span> This is a lab</label>
+                    </label>
+                    <label class="lab-section-container">
+                        | Section:
+                        <select class="dropdown-lab-section" name="ta-dropown" size="1">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </label>
+                </div>
+
+                <div class="class-times">
+                    <input type="text" placeholder="Start time" class="class-start-time" name="start-time" />
+                    <div class="class-times-radio-buttons">
+                        <div class="time-radio-button">
+                            <input class="start-am radio-am-pm" type="radio" id="start-am" />
+                            <label for="start-am" class="start-am-label"><span class="icon"></span> AM</label>
+                        </div>
+                        <div class="time-radio-button">
+                            <input class="start-pm radio-am-pm" type="radio" id="start-pm" />
+                            <label for="start-pm" class="start-pm-label"><span class="icon"></span> PM</label>
+                        </div>
+                    </div>
+                    <input type="text" placeholder="Finish time" class="class-finish-time" name="finish-time" />
+                    <div class="class-times-radio-buttons">
+                        <div class="time-radio-button">
+                            <input class="finish-am radio-am-pm" type="radio" id="finish-am" />
+                            <label for="finish-am" class="finish-am-label"><span class="icon"></span> AM</label>
+                        </div>
+                        <div class="time-radio-button">
+                            <input class="finish-pm radio-am-pm" type="radio" id="finish-pm" />
+                            <label for="finish-pm" class="finish-pm-label"><span class="icon"></span> PM</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="class-days">
+                    <label for="class-days-checks">Class days:</label>
+                    <div class="class-days-checks" id="class-days-checks">
+
+                        <div>
+                            <input id="Sun" type="checkbox" class="sun-check day-check">
+                            <label for="Sun" class="finish-am-label"><span class="icon"><br /></span>Sun</label>
+                        </div>
+
+                        <div>
+                            <input id="M" type="checkbox" class="m-check day-check">
+                            <label for="M" class="finish-am-label"><span class="icon"><br /></span>M</label>
+                        </div>
+
+                        <div>
+                            <input id="Tu" type="checkbox" class="tu-check day-check">
+                            <label for="Tu" class="finish-am-label"><span class="icon"><br /></span>Tu</label>
+                        </div>
+
+                        <div>
+                            <input id="W" type="checkbox" class="w-check day-check">
+                            <label for="W" class="finish-am-label"><span class="icon"><br /></span>W</label>
+                        </div>
+
+                        <div>
+                            <input id="Th" type="checkbox" class="th-check day-check">
+                            <label for="Th" class="finish-am-label"><span class="icon"><br /></span>Th</label>
+                        </div>
+
+                        <div>
+                            <input id="F" type="checkbox" class="f-check day-check">
+                            <label for="F" class="finish-am-label"><span class="icon"><br /></span>F</label>
+                        </div>
+
+                        <div>
+                            <input id="Sat" type="checkbox" class="sat-check day-check">
+                            <label for="Sat" class="finish-am-label"><span class="icon"><br /></span>Sat</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tas-wanted">
+                    <label>Number of TAs wanted: </label>
+
+                    <select class="dropdown-wanted-tas" name="ta-dropown" size="1">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+            </form>
+        </section>
+    </section>
+    {% endif %}
+    <!--^^^^^^^^^ Create Lecture Section ^^^^^^^^^^-->
+
+
+
+
+
+</body>

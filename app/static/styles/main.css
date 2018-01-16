@@ -1,0 +1,707 @@
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    color: #3b3b3b;
+    -webkit-font-smoothing: antialiased;
+    background: #2b2b2b;   
+}
+
+header {
+    background: #CCCCCC;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.35);
+    height: 60px;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: initial;
+    z-index: 9;
+}
+
+.list-holder{
+    float: right;
+}
+
+.h-option {
+    /*color: inherit;*/
+    color: #404040;
+    text-decoration: none;
+    padding: 25px;
+}
+
+    .h-option:hover {
+        color: #FF5959;
+    }
+
+.h-list-option {
+    /*list-style-type: none;*/
+    margin: 0 auto;
+    padding: 0;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    
+}
+
+.list-options {
+    display: flex;
+}
+
+.header-options-list {
+    /*display: none;*/
+    height: 40px;
+    line-height: 40px;
+    margin: 0 80px;
+    padding: 10px;
+    float: right;
+    max-width: 400px;
+    
+}
+
+.user-welcome {
+    margin: 15px 0 0 100px;
+    
+    /*height: 40px;*/
+    padding: 10px;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.header-wsu-logo {
+    border: none;
+    background: none;
+    color: transparent;
+    height: 40px;
+    padding: 10px;
+    display: inline-block;
+    width: 40px;
+    background-image: url('../images/wsuicon.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    float: left;
+}
+
+header,
+.header-container,
+.header-options-list{
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+}
+
+.mainbody {
+    margin: 60px auto;
+    padding: 40px 60px 40px 40px;
+    max-width: 800px;
+    background: #95A1A0;
+    z-index: -1;
+}
+
+.table-seperator {
+    background: #4C2431;
+    margin: 0px auto 30px auto;
+    /*margin: 0 auto;*/
+    padding: 10px;
+    width: 100%;
+}
+
+    .table-seperator.search-form {
+        padding: 10px 10px 55px 10px;
+    }
+
+.my-table {
+    /*margin: 0 0 40px 0;*/
+    /*margin: 0px auto, 40px, auto;*/
+    overflow: hidden;
+    width: 100%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    display: table;
+}
+
+.my-table-entry-rows {
+    display: table-row;
+    background: #f6f6f6;
+    transition: all .1s ease-in-out .1s;
+}
+
+    .my-table-entry-rows:nth-of-type(odd) {
+        background: #e9e9e9;
+    }
+
+    .my-table-entry-rows:nth-child(even) {
+        background-color: #dddddd;
+    }
+
+    .my-table-entry-rows:hover {
+        cursor: pointer;
+        background-color: #afdaf7;
+    }
+
+    .my-table-entry-rows.highlighted {
+        background-color: #68c3ff;
+    }
+
+.my-table-header-row {
+    font-weight: 900;
+    color: #ffffff;
+    background: #ea6153;
+}
+
+.accepted-applications-hdr {
+    background: #27ae60;
+}
+
+.applied-applications-hdr,
+.my-lectures-hdr {
+    background: #2980b9;
+}
+
+.my-table-entries {
+    padding: 6px 12px;
+    display: table-cell;
+}
+
+.my-table-identifier {
+    text-align: center;
+    font-size: 16px;
+    border-style: solid;
+    border-width: 1px;
+    padding: 5px;
+    background-color: honeydew;
+    overflow: hidden;
+    /*background-image: url('../images/wsuicon.png');*/
+}
+
+
+
+.my-table-headers:hover {
+    cursor: pointer;
+    background-color: grey;
+}
+
+
+.search-from-inputs {
+    display: flex;
+    justify-content: space-between;
+}
+
+.lecture-search-criteria {
+    color: white;
+    margin: 0 0 10px 0;
+}
+
+
+/*edit profile section vvvvvvvv*/
+
+.profile-section {
+    position: absolute;
+    margin: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.blured {
+    -webkit-filter: blur(2px);
+    filter: blur(2px);
+}
+
+.edit-profile-page-wrapper {
+    margin: 0 auto;
+    max-width: 400px;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 5px;
+    box-shadow: 0 17px 50px 0 rgba(0,0,0,.19),0 12px 15px 0 rgba(0,0,0,.24);
+    top: 80px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    display: table;
+    transition: all .2s ease-in-out .1s;
+    visibility: hidden;
+    transform: scale(0);
+    opacity: 0;
+}
+
+    .edit-profile-page-wrapper.show-profile {
+        visibility: visible;
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    .edit-profile-page-wrapper > * {
+        position: relative;
+    }
+
+.profile-picture-section {
+    height: 400px;
+    width: 100%;
+    background-repeat: no-repeat;
+    text-align: center;
+    /*background-image: url("a.jpg");*/
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.section-header,
+.section-entry {
+    width: 100%;
+    height: 30px;
+    padding: 10px;
+}
+
+.section-header {
+    background: #B7AFA3;
+    color: #374046;
+    text-decoration: none;
+    transition: all .3s ease-in-out 0s;
+}
+
+    .section-header:hover,
+    .section-header.active {
+        background: #E8D0A9;
+    }
+
+    .section-header:hover {
+        color: #B77F24;
+        cursor: pointer;
+    }
+
+/*.section-header:not(:last-child) {
+        border-bottom: 1px solid rgba(0,0,0,.2);
+    }*/
+
+.section-header {
+    border-bottom: 1px solid rgba(0,0,0,.2);
+}
+
+.section-entry {
+    display: none;
+    color: #374046;
+    overflow: hidden;
+    background: #ecf0f1;
+    transition: all .1s ease-in-out .1s;
+}
+
+    .section-entry:hover {
+        background: #c2ced1;
+        box-shadow: 5px 0 0 #8ca3a8 inset;
+    }
+
+.section-header.active ~ .section-entry {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+}
+
+/*.section-header.active ~ .section-entry:not(:last-child) {
+        border-bottom: 1px solid rgba(0,0,0,.1);
+    }*/
+
+.section-header.active ~ .section-entry {
+    border-bottom: 1px solid rgba(0,0,0,.1);
+}
+
+.section-text {
+    font: 400 16px/18px Roboto, sans-serif;
+}
+
+.my-button {
+    opacity: 0;
+    visibility: hidden;
+    float: right;
+    background-color: #6B99CE;
+    text-align: center;
+    color: #ffffff;
+    margin-right: 10px;
+    transform: translateY(-20px) scale(0);
+}
+
+.section-header.active > .my-button,
+.section-header.active ~ .section-entry > .my-button {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+    transition: all .1s ease-in-out .1s;
+}
+
+.section-entry > .section-text,
+.section-entry > .dropdown-class-names,
+.section-entry > .dropdown-grades {
+    float: left;
+    margin: 0 5px 0 0;
+}
+
+.section-entry > .dropdown-class-names {
+    margin: 0 10px 0 0;
+}
+
+.underlined-text {
+    text-decoration: underline;
+}
+
+/*edit profile section ^^^^^^^^^^*/
+
+
+
+
+
+
+
+/*mini profile popup window vvvvvvvvvvv*/
+
+
+
+
+.mini-profile-container {
+    /*margin: 0 auto;*/
+    margin: 0;
+    max-width: 325px;
+    width: 100%;
+    overflow: visible;
+    /*overflow-y: scroll;*/
+    border-radius: 5px;
+    background-color: antiquewhite;
+    box-shadow: 0 17px 50px 0 rgba(0,0,0,.19),0 12px 15px 0 rgba(0,0,0,.24);
+    position: absolute;
+    right: 3px;
+    top: 80px;
+    visibility: hidden;
+    display: inline-block;
+    opacity: 0;
+    transition: all .5s ease-in-out .1s;
+    /*transform: translateX(340px);*/
+    transform: scale(0, 1);
+    transform-origin: 100% 50%;
+    z-index: 1;
+}
+
+    .mini-profile-container.show-mini-profile {
+        visibility: visible;
+        opacity: 1;
+        /*transform: translateX(0);*/
+        transform: scale(1, 1);
+        transform-origin: 50% 50%;
+    }
+
+        .mini-profile-container.show-mini-profile .mainbody {
+        }
+
+.mini-profile-close-button {
+    float: right;
+    width: 25px;
+    height: 25px;
+    margin: 5px 5px 0 0;
+    border-radius: 50%;
+}
+
+    .mini-profile-close-button:hover {
+        cursor: pointer;
+        background-color: red;
+    }
+
+.mini-profile-header,
+.mini-profile-content {
+    width: 100%;
+}
+
+.mini-profile-header {
+    text-align: center;
+    padding: 40px 0 0 0;
+}
+
+.mini-profile-persons-name {
+    font-size: 200%;
+    margin: 0;
+}
+
+.mini-profile-persons-occupation {
+    font-size: 150%;
+    color: #329696;
+    margin: 0 0 10px 0;
+}
+
+.mini-profile-picture {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    margin: 20px 0 -70px 0;
+    border: 3px solid #505064;
+}
+
+.mini-profile-content {
+    background: #505064;
+    color: antiquewhite;
+    padding: 75px 0 55px 0;
+    text-align: center;
+}
+
+.mini-profile-classes-taken-container,
+.mini-profile-class-info-container,
+.mini-profile-bio-container {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.mini-profile-content-header {
+    font-size: 125%;
+    color: #92efdd;
+}
+
+.mini-profile-bio {
+    margin: 0 20px 20px 20px;
+}
+
+.mini-profile-class-info-list {
+    list-style-type: none;
+    text-align: left;
+    display: inline-block;
+    margin: 0 0 20px 0;
+}
+
+.mini-profile-class-info-list-entry {
+    list-style-type: none;
+}
+
+.mini-profile-button {
+    background: #2073aa;
+    border-radius: 28px;
+    color: #ffffff;
+    font-size: 100%;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    z-index: 0;
+}
+
+    .mini-profile-button:hover {
+        background: #3cb0fd;
+        cursor: pointer;
+    }
+
+.mini-profile-button.put-to-left {
+    margin: 0 0 0 10px;
+    float: left;
+}
+
+.mini-profile-button.put-to-right {
+    margin: 0 10px 0 0;
+    float: right;
+}
+
+/*mini profile popup window ^^^^^^^^^^*/
+
+
+
+/*  ~~~~vvvvvvvvv create lecture stuff vvvvvvvv~~~~~~  */
+
+.create-lecture-wrapper {
+    margin: 0 auto;
+    max-width: 450px;
+    padding: 0;
+    box-shadow: 0 17px 50px 0 rgba(0,0,0,.19),0 12px 15px 0 rgba(0,0,0,.24);
+    top: 180px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    display: table;
+    background-color: antiquewhite;
+    border-radius: 7px;
+    transition: all .5s ease-in-out .1s;
+    opacity: 0;
+    transform: scale(0);
+    visibility: hidden;
+}
+
+    .show-create-lecture {
+        opacity: 1;
+        transform: scale(1);
+        visibility: visible;
+    }
+
+.create-lecture-window {
+    margin: 0;
+    padding: 20px 30px 50px 30px;
+    max-width: 350px;
+    background: #505064;
+    color: #eaddcc;
+    font: 600 16px/18px 'Open Sans',sans-serif;
+    border-radius: 0 0 7px 7px;
+}
+
+.create-lecture-header {
+    margin: 0;
+    background-color: antiquewhite;
+}
+
+
+.form-title {
+    padding: 20px 30px 10px 30px;
+    margin: 0;
+    width: 100%;
+    color: crimson;
+    display: block;
+    font-size: 30px;
+    font-weight: 400;
+}
+
+.class-options, .class-times, .class-days, .tas-wanted {
+    margin: 0 0 20px 0;
+}
+
+.class-days {
+    padding: 40px 0 0 0;
+}
+
+.time-radio-button {
+    margin: 0 25px 0 0;
+}
+
+.class-times-radio-buttons {
+    margin: 0 0 15px 0;
+}
+
+.class-start-time,
+.class-finish-time {
+    max-width: 80px;
+    margin: 8px 0 0 0;
+    float: left;
+}
+
+.class-times-radio-buttons {
+    float: left;
+}
+
+.class-days-checks {
+    display: flex;
+    justify-content: space-between;
+}
+
+    .class-days-checks div {
+        display: inline-block;
+        text-align: center;
+    }
+
+.class-days {
+    max-width: 200px;
+}
+
+.go-back-button {
+    float: left;
+}
+
+.submission {
+    float: right;
+}
+
+label .icon {
+    width: 15px;
+    height: 15px;
+    border-radius: 2px;
+    position: relative;
+    display: inline-block;
+    background: rgba(255,255,255,.1);
+}
+
+.time-radio-button label .icon {
+    border-radius: 50%;
+}
+
+label .icon:before,
+label .icon:after {
+    content: '';
+    width: 10px;
+    height: 2px;
+    background: #fff;
+    position: absolute;
+    transition: all .2s ease-in-out 0s;
+}
+
+label .icon:before {
+    left: 3px;
+    width: 5px;
+    bottom: 6px;
+    transform: scale(0) rotate(0);
+}
+
+label .icon:after {
+    top: 6px;
+    right: 0;
+    transform: scale(0) rotate(0);
+}
+
+
+.lab-checkbox,
+.radio-am-pm,
+.day-check {
+    display: none;
+}
+
+input + label {
+    color: #eaddcc;
+}
+
+input:checked + label .icon {
+    background: #1161ee;
+}
+
+    input:checked + label .icon:before {
+        transform: scale(1) rotate(45deg);
+    }
+
+    input:checked + label .icon:after {
+        transform: scale(1) rotate(-45deg);
+    }
+
+/*  ~~~~^^^^^^^^^ create lecture stuff ^^^^^^^^^~~~~~~  */
+
+
+
+@media screen and (max-width: 580px) {
+    .my-table {
+        display: block;
+    }
+
+    .my-table-entries {
+        padding: 2px 12px;
+        display: block;
+    }
+
+    .my-table-identifier {
+        display: block;
+    }
+
+    .table-seperator {
+        display: block;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
